@@ -1,29 +1,36 @@
 <section id="tweets">
-  {{#each tweets as |t|}}
-  <div class="card w-100 mb-3">
-    <div class="card-body">
-      <p class="card-subtitle mb-2 text-muted">{{date t.createdAt}}</p>
 
-      <p class="card-text">
-        {{t.body}}
-      </p>
-
-      <img class="rounded-sm w-100 mb-1" src="{{t.image}}" />
-
-      <a class="text-muted d-block text-sm mb-2" href="/tweets/{{t._id}}">
-        <i class="fa fa-comments"></i>
-        {{t.comments.length}} comments
-      </a>
-
-      <div>
-        <button class="btn btn-sm mb-2 btn-outline-danger" id="{{t._id}}" onclick="like(event)">
-          <i class="fa fa-heart"></i>
-          <span class="likes-count">{{t.likes.length}}</span> likes
-        </button>
+  <div class="row">
+    <div class="col-6">
+      {{#each tweets as |t|}}
+      <div class="card w-100 mb-3">
+        <div class="card-body">
+          <p class="card-subtitle mb-2 text-muted">{{date t.createdAt}}</p>
+      
+          <p class="card-text">
+            {{t.body}}
+          </p>
+      
+          <img class="rounded-sm w-100 mb-1" src="{{t.image}}" />
+      
+          <a class="text-muted d-block text-sm mb-2" href="/tweets/{{t._id}}">
+            <i class="fa fa-comments"></i>
+            {{t.comments.length}} comments
+          </a>
+      
+          <div>
+            <button class="btn btn-sm mb-2 btn-outline-danger" id="{{t._id}}" onclick="like(event)">
+              <i class="fa fa-heart"></i>
+              <span class="likes-count">{{t.likes.length}}</span> likes
+            </button>
+          </div>
+      
+          <a href="/{{t.user.username}}" class="d-block">@{{t.user.username}}</a>
+        </div>
       </div>
-
-      <a href="/{{t.user.username}}" class="d-block">@{{t.user.username}}</a>
+      {{/each}}
     </div>
+
+    <div class="col-6"></div>
   </div>
-  {{/each}}
 </section>

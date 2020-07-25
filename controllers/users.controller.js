@@ -68,9 +68,11 @@ module.exports.signup = (req, res, next) => {
 }
 
 module.exports.createUser = (req, res, next) => {
-  const userParams = req.body;
-  userParams.avatar = req.file ? `/uploads/${req.file.filename}` : undefined;
-  const user = new User(userParams);
+  console.log('Hey!!')
+  const user = new User({
+    ...req.body,
+    avatar: req.file ? req.file.path : undefined
+  });
 
   user.save()
     .then(user => {

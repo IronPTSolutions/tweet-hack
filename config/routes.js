@@ -4,7 +4,7 @@ const multer = require('multer');
 const tweetsController = require('../controllers/tweets.controller')
 const usersController = require('../controllers/users.controller')
 const sessionMiddleware = require('../middlewares/session.middleware')
-const uploads = multer({ dest: './public/uploads' });
+const uploads = require('../config/multer.config');
 
 router.get('/auth/slack', sessionMiddleware.isNotAuthenticated, usersController.doSocialLogin);
 router.get('/login', sessionMiddleware.isNotAuthenticated, usersController.login);
@@ -14,7 +14,9 @@ router.post('/users', sessionMiddleware.isNotAuthenticated, uploads.single('avat
 router.get('/activate/:token', sessionMiddleware.isNotAuthenticated, usersController.activateUser);
 router.post('/logout', sessionMiddleware.isAuthenticated, usersController.logout);
 router.get('/tweets', sessionMiddleware.isAuthenticated, tweetsController.list);
+router.get('/tweets/locations', sessionMiddleware.isAuthenticated, tweetsController.locations);
 router.post('/tweets/:id/like', sessionMiddleware.isAuthenticated, tweetsController.like)
+router.get('/map', sessionMiddleware.isAuthenticated, tweetsController.map)
 
 router.get("/", (req, res) => {
   res.redirect("/tweets");

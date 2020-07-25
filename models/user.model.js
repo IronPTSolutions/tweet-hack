@@ -58,7 +58,9 @@ const userSchema = new mongoose.Schema({
   social: {
     slack: String
   }
-});
+},
+{ timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
+);
 
 userSchema.pre('save', function (next) {
   if (this.isModified('password')) {

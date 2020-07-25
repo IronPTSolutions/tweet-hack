@@ -1,12 +1,12 @@
-<img src="{{user.avatar}}" class="w-100 rounded-circle mb-3" />
+<img src="{{currentUser.avatar}}" class="w-100 rounded-circle mb-3" />
 
 <p>
-  {{user.name}}<br>
-  <a href="/{{user.username}}">@{{user.username}}</a>
+  {{currentUser.name}}<br>
+  <a href="/{{currentUser.username}}">@{{currentUser.username}}</a>
 </p>
 
 <p>
-  {{user.bio}}
+  {{currentUser.bio}}
 </p>
 
 <form action="/logout" method="post">

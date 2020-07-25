@@ -17,8 +17,15 @@ const tweetSchema = new mongoose.Schema(
     image: {
       type: String,
     },
+    location: {
+      type: {
+        type: String,
+        default: "Point"
+      },
+      coordinates: [Number]
+    }
   },
-  { timestamps: true, toJSON: { virtuals: true } }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
 tweetSchema.virtual("comments", {
