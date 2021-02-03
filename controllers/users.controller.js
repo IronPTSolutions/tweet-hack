@@ -7,7 +7,7 @@ module.exports.login = (req, res, next) => {
   res.render('users/login')
 }
 
-module.exports.doSocialLogin = (req, res, next) => {
+module.exports.doSlackLogin = (req, res, next) => {
   const passportController = passport.authenticate("slack", (error, user) => {
     if (error) {
       next(error);
@@ -123,6 +123,19 @@ module.exports.activateUser = (req, res, next) => {
       }
     })
     .catch(e => next)
+}
+
+module.exports.doGoogleLogin = (req, res, next) => {
+  const passportController = passport.authenticate("google", (error, user) => {
+    if (error) {
+      next(error);
+    } else {
+      req.session.userId = user._id;
+      res.redirect("/");
+    }
+  })
+  
+  passportController(req, res, next);
 }
 
 module.exports.logout = (req, res, next) => {
