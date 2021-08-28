@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const secure = require('../middlewares/secure.mid')
 const users = require('../controllers/users.controller')
+const tweets = require('../controllers/tweets.controller')
+const upload = require('../config/multer.config')
 
 router.post('/users', secure.isNotAuthenticated, users.create)
 router.post('/login', secure.isNotAuthenticated, users.login)
@@ -10,6 +12,12 @@ router.get('/users/:id', secure.isAuthenticated, users.get)
 router.patch('/profile', secure.isAuthenticated, users.update)
 router.delete('/profile', secure.isAuthenticated, users.delete)
 router.post('/users/:id/follow', secure.isAuthenticated, users.follow)
+
+
+router.post('/tweets', secure.isAuthenticated, upload.single('image'), tweets.create);
+router.get('/tweets', secure.isAuthenticated, tweets.list);
+router.delete('/tweets/:id', secure.isAuthenticated, tweets.delete);
+
 
 /*
 
