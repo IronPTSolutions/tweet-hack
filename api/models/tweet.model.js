@@ -28,5 +28,19 @@ const schema = new Schema({
   }
 });
 
+schema.virtual('comments', {
+  ref: 'Comment',
+  localField: '_id',
+  foreignField: 'tweet',
+  justOne: false,
+});
+
+schema.virtual('likes', {
+  ref: 'Like',
+  localField: '_id',
+  foreignField: 'tweet',
+  count: true,
+});
+
 const Tweet = mongoose.model('Tweet', schema);
 module.exports = Tweet;
